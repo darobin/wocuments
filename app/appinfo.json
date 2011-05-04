@@ -1,0 +1,8 @@
+{
+    "name":             "Wocuments",
+    "vendor":           "Robin Berjon",
+    "version":          "0.1",
+    "developer_email":  "robin@berjon.com",
+    "menubars":         true,
+    "resizable":        true
+}
