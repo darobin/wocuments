@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns='http://www.w3.org/1999/xhtml' xml:lang='en' lang='en'>
+  <head>
+    <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
+    <title>Simplest Wocument Ever</title>
+  </head>
+  <body>
+    <p>
+      Edit the value: <input type="text" name="simple" id="simple"/>. <button id='save'>Save</button>
+    </p>
+  </body>
+  <script>
+    window.onload = function () {
+        // load data from /data/value.json and set value
+        var simpleInput = document.getElementById("simple"),
+            fileName = "value.json",
+            dd = wocument.dataDirectory;
+        dd.getFileAsJSON(fileName, { create: true }, function (obj) {
+            simpleInput.value = obj.value;
+        });
+        // attach handler to save button that writes back
+        document.getElementById("save").onclick = function () {
+            dd.saveFileAsJSON(fileName, { value: simpleInput.value });
+        };
+    };
+  </script>
+</html>
