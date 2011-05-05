@@ -15,8 +15,9 @@
         var simpleInput = document.getElementById("simple"),
             fileName = "value.json",
             dd = wocument.dataDirectory;
-        dd.getFileAsJSON(fileName, { create: true }, function (obj) {
-            simpleInput.value = obj.value;
+        dd.getFileAsJSON(fileName, function (obj) {
+            if (!obj) simpleInput.value = 0;
+            else      simpleInput.value = obj.value;
         });
         // attach handler to save button that writes back
         document.getElementById("save").onclick = function () {
