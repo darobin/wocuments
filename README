@@ -1,0 +1,67 @@
+
+Wocuments is an experimental take on how documents could be handled, aiming to replace the
+antiquated approach chosen by office suites. Essentially, wocuments are self-editable Web
+documents. They contain both the data and the code necessary to edit it, all inside a simple
+package. They make use of traditional Web technologies, with just a couple APIs thrown in
+so that the content may be persisted. After a wocument has been edited, you can copy it to
+a key, email it over, everything that you can normally do with a document — and it'll just
+work.
+
+This approach is resolutely NOT cloud-based. Not everything should be in the cloud.
+
+An infinite number of document types can be created, from rich text or structured editors to
+vector or raster graphics, from charts to databases — anything you can do using Web technology
+works.
+
+The experimental implementation is built using Mozilla Chromeless, which is itself experimental.
+Use at your own risk.
+
+
+INSTALLATION
+
+First, you will need my own customised fork of Chromeless which contains some additional 
+functionality (Zip archives and opening windows):
+
+    https://github.com/darobin/chromeless
+
+Then you will need to this code. The simplest is probably to just git clone it.
+
+In order to run it then from inside the chromeless directory just do:
+
+    ./chromeless path/to/wocuments/app/index.html
+
+And the application will show up. You can also do:
+
+    ./chromeless appify path/to/wocuments/app/index.html
+
+That will produce an application for your platform that you can use in the regular way.
+
+
+USAGE
+
+Everything in Wocuments is currently extremely crude. Click "Open" to open a wocument. That's
+about all that you can do. In order to quit you will need to close all open windows.
+
+IMPORTANT NOTE: there is currently a bug such that if you save data inside a wocument and close it,
+*in some cases* you won't be able to reopen it right away. You will first need to quit and restart 
+Wocuments. The data is saved successfully nevertheless. This bug is exhibited in the "basic-save-value"
+example but not in "simple-rich-text".
+
+
+WOCUMENTS
+
+If you look inside the examples directory you will see some wocuments, recognisable by their
+.woc extension. The code for them is right next to them as well.
+
+Wocuments are just zipped Web content, with two important conventions:
+
+  1) there must be an entry called index.html at the root of the archive OR the root of the archive
+     must contain only one directory, which itself must contain an index.html. Otherwise nothing
+     will load;
+
+  2) data is saved to a "data" directory that lives at the same level as index.html.
+
+Anything else is done whichever way you feel like doing. The console prints to STDERR. There's a
+little ruby script that packs the examples, but as you can see from the source it's not really
+rocket neurosurgery.
+

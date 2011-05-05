@@ -128,22 +128,23 @@
     }
     DataDirectory.prototype = {
         getFileAsJSON:    function (name, cb) {
-            console.log("getFileAsJSON for name=" + name);
+            this.getFileAsText(name, function (txt) { cb(JSON.parse(txt)); });
+        },
+        saveFileAsJSON:    function (name, object) {
+            this.saveFileAsText(name, JSON.stringify(object));
+        },
+        getFileAsText:    function (name, cb) {
             var zip = this.woc.zip,
                 entry = this.dir + name;
-            console.log("entry=" + entry);
             if (zip.hasEntry(entry)) {
-                console.log("entry exists");
-                cb(JSON.parse(zip.entryAsText(entry)));
-                console.log("callback called");
+                cb(zip.entryAsText(entry));
             }
             else {
-                console.log("entry does not exist");
                 cb(null);
             }
         },
-        saveFileAsJSON:    function (name, object) {
-            this.woc.zip.addEntryFromText(this.dir + name, JSON.stringify(object));
+        saveFileAsText:    function (name, text) {
+            this.woc.zip.addEntryFromText(this.dir + name, text);
         },
     };
 
